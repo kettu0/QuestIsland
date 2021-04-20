@@ -51,7 +51,7 @@ C#, ASP.NET Core, MVC, DAO, SQL, PostgreSQL, JavaScript, GIT, HTML5, CSS3
 ![mentors](https://user-images.githubusercontent.com/60843449/115465552-16866080-a22f-11eb-8da2-87209cf7b88b.png)
 
 ## List of students
-![devs](https://user-images.githubusercontent.com/60843449/115465545-15553380-a22f-11eb-893e-40fbb78a821a.png)
+![ccls](https://user-images.githubusercontent.com/60843449/115465539-14240680-a22f-11eb-9f60-96668f8de57f.png)
 
 ## List of Devs
-![ccls](https://user-images.githubusercontent.com/60843449/115465539-14240680-a22f-11eb-9f60-96668f8de57f.png)
+![devs](https://user-images.githubusercontent.com/60843449/115465545-15553380-a22f-11eb-893e-40fbb78a821a.png)
