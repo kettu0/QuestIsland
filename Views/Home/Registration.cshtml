@@ -1,0 +1,44 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<script src="js/dominic_script.js"></script>
+<div class="questArtifact" id="quest_artifact">
+    <form method="post">
+        <p><h2>CREATE / EDIT USER</h2></p>
+        <p><input type="text" placeholder="Name" id="name" asp-for="FirstName"></p>
+        <p><input type="text" placeholder="Surname" id="surname" asp-for="LastName"></p>
+        <p><input type="text" placeholder="E-mail" id="email" asp-for="Email"></p>
+        <p><input type="text" placeholder="Nickname" id="nickname" asp-for="Username"></p>
+        <p><input type="password" placeholder="Password" id="password" name="password" asp-for="Password" onkeyup="check()"></p>
+        <p><input type="password" placeholder="Repeat Password" id="confirm-password" name="password" onkeyup="check()"> </p>
+
+        <p>
+            <input type="radio" id="Mentor" name="user" value="Mentor"><label for="Mentor">Mentor</label>
+            <input type="radio" id="Codecooler" name="user" value="Codecooler"><label for="Codecooler">Codecooler</label>
+        </p>
+        <p><input type="submit" value="SUBMIT"></p>
+    </form>
+</div>
+
+
+
+<@*div class="text-area">
+    <article>
+        <p id="main-text">login</p>
+        <div class="mainp"><p>Login with your nickname and password to embark on a quest!</p></div>
+        <form method="post">
+            <input type="text" placeholder="Pirate nickname" id="nickname" asp-for="Username" /><br />
+            <input type="text" placeholder="Secret pirate code" id="password" asp-for="Password" /><br />
+            <input type="submit" value="Login!" id="button" target="_blank" asp-controller="Home" asp-action="Login"><br>
+        </form>
+
+        <form action="front.html">
+
+            </form>
+    </article>
+    <p><a href="#">Forgot your password? <br />Click HERE</a></p>
+</div>
+*@

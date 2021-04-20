@@ -1,0 +1,60 @@
+﻿@model QuestStore_C_of_thieves.Models.Artifact
+@{
+    ViewBag.Title = Model.Name;
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@section searchbar{
+    <form method="get" asp-controller="Artifact" asp-action="Search">
+        <div class="searchbox">
+            <input type="text" placeholder="&#x1F50E Search the Seven Seas for artifacts!" id="search" name="keyword">
+        </div>
+    </form>
+}
+
+<article id="itemview">
+
+    <h1>@Model.Name</h1>
+    <div class="itemdetails">
+        <span class="itemimage">
+            <img src="~/img/@Model.Image" id="itemicon" height="300" />
+        </span>
+        <div class="itemdata">
+            <div>
+                <p>Name: @Model.Name</p>
+                <p>Type: @Model.Type</p>
+                <p>Price: @Model.Price</p>
+                <p>Amount: @Model.Amount</p>
+            </div>
+            @if (_activeUser.UserRole == "C")
+            {
+                if (Model.Amount > 0)
+                {
+
+
+                    <div class="about">
+                        <div class="card">
+                            <img src="~/img/booty.png" class="card" height="100" />
+                            <a asp-controller="Artifact" asp-action="CheckArtifactValue" asp-route-id="@Model.Id"><div class="card-overlay">Grab the booty!</div></a>
+                        </div>
+                    </div>
+                }
+
+                else
+                {
+                    <div class="about">
+                        <div class="card">
+                            <img src="~/img/empty.png" class="card" height="100" />
+                            <div class="card-overlay">Out of stock</div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="itemdescription">
+        @Model.Description
+    </div>
+</article>
+

@@ -1,0 +1,46 @@
+﻿@model QuestStore_C_of_thieves.Models.Class
+
+@{
+    ViewData["Title"] = "Throw overboard?!";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+
+    <div class="class_delete_text">
+        Are you sure captain, that you want to throw those landllubers overboard? 
+    </div>
+
+    <br />
+
+    <div class="artifacts">
+        <div class="card">
+            <img src="~/img/pirate_flag_3.png" id="icon">
+            <div class="container">
+                <p id="cardtitle"> #@Model.Id @Model.ClassName</p>
+                <p id="carddescription">DATE OF CREATION: @Model.StartDate.ToString("dd/MM/yyyy")</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="deleteClass" style="text-align:center">
+        <form method="post">
+            <input type="submit" value="Aye, let the sharks feast!" asp-controller="Group" asp-action="DeleteClass">
+        </form>
+    </div>
+   
+
+    <div class="class_delete_text">
+        <a asp-controller="Group" asp-action="Classes">No, I changed my mind. </a>
+    </div>
+
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see here!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}
+

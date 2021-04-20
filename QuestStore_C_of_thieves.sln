@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestStore_C_of_thieves", "QuestStore_C_of_thieves.csproj", "{59FADBEF-76A1-4C83-95E7-A7EAE86B09D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59FADBEF-76A1-4C83-95E7-A7EAE86B09D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59FADBEF-76A1-4C83-95E7-A7EAE86B09D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59FADBEF-76A1-4C83-95E7-A7EAE86B09D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59FADBEF-76A1-4C83-95E7-A7EAE86B09D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F1DB2BC-3651-4740-ABCA-FB6EF3335BC7}
+	EndGlobalSection
+EndGlobal

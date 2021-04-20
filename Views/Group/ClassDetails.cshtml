@@ -1,0 +1,75 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.ClassRepository;
+@{
+    ViewBag.Title = "Search results";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    <br />
+    <br />    <br />
+    <center>
+
+        <div class="team_detail">
+            @Model.Entity.ClassName
+        </div>
+
+        <h1>CODECOOLERS</h1>
+
+        <table class="styled-table" id="small-table">
+
+            <tr>
+                <th align="center"><h3>  ID</h3> </th>
+                <th align="center"><h3> NAME</h3>  </th>
+                <th align="center"> <h3>  LAST NAME </h3></th>
+                <th align="center"> <h3> E-MAIL ADRESS</h3></th>
+            </tr>
+            @foreach (var user in Model.UsersCodecoolers)
+            {
+                <tr>
+                    <td align="center"><h3><a asp-controller="User" asp-action="Details" asp-route-id="@user.UserId">  @user.UserId </a> </h3> </td>
+                    <td align="center"><h3><a asp-controller="User" asp-action="Details" asp-route-id="@user.UserId"> @user.FirstName </a></h3></td>
+                    <td align="center"><h3>@user.LastName </h3></td>
+                    <td align="center"><h3> @user.Email </h3></td>
+                </tr>
+            }
+        </table>
+    </center>
+
+
+    <center>
+        <br />    <br />    <br />
+        <h1>MENTORS</h1>
+        <div>
+            <table class="styled-table" id="small-table">
+                <tr>
+                    <th align="center"><h3>  ID</h3> </th>
+                    <th align="center"><h3> NAME</h3>  </th>
+                    <th align="center"> <h3>  LAST NAME </h3></th>
+                    <th align="center"> <h3> E-MAIL ADRESS</h3></th>
+                </tr>
+                @foreach (var mentor in Model.UsersMentors)
+                {
+                    <tr>
+                        <td align="center"><h3><a asp-controller="User" asp-action="Details" asp-route-id="@mentor.UserId"> @mentor.UserId </a> </h3> </td>
+                        <td align="center"><h3><a asp-controller="User" asp-action="Details" asp-route-id="@mentor.UserId">  @mentor.FirstName</a></h3></td>
+                        <td align="center"><h3> @mentor.LastName </h3></td>
+                        <td align="center"><h3> @mentor.Email </h3></td>
+                    </tr>
+
+                }
+            </table>
+        </div>
+    </center>
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see here!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}
+
+
+
+

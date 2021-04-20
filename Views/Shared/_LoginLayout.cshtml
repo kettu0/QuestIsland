@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Set sail and embark on a quest!</title>
+    <link rel="stylesheet" href="~/css/loginstyle.css">
+</head>
+<body>
+    <div class="maincontainer">
+        <header><img src="~/img/Questisland.png" id="questisland"></header>
+        <section>
+
+
+            <main role="main" class="pb-3">
+                <article>
+                    @RenderBody()
+
+                </article>
+            </main>
+        </section>
+        <footer>
+            <p id="footer_p">Created by C of Thieves</p>
+            <div class="octodiv"><img src="~/img/octopus.png" id="octopus"></div>
+        </footer>
+    </div>
+</body>
+</html>

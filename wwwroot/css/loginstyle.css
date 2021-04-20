@@ -1,0 +1,275 @@
+﻿body {
+    background-color: #baddff;
+    font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif;
+    font-stretch: condensed;
+    color: #022644;
+    margin: 0;
+    padding: 0;
+    -moz-appearance: none;
+}
+
+
+
+    .maincontainer {
+    position: relative;
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-content: space-around;
+    font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif;
+    font-stretch: condensed;
+    color: #022644;
+    font-size: 10px;
+    -webkit-user-select: none; /* Chrome all / Safari all */
+    -moz-user-select: none; /* Firefox all */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Likely future */
+}
+
+section {
+    background-color: #4f7cc9;
+    border-width: 2px;
+    border-color: #022644;
+    border-style: groove;
+    color: #baddff;
+    min-width: 30%;
+    max-width: 30%;
+    height: auto;
+    border-radius: 35px;
+}
+
+header {
+    min-width: 50%;
+    height: auto;
+}
+
+#questisland {
+    max-width: 50%;
+    min-width: 50%;
+    height: auto;
+}
+
+#main-text {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: calc(1em + 2vw);
+    font-weight: bold;
+    text-align: center;
+}
+
+.text-area {
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+}
+
+#message {
+    height: 180px;
+    overflow: hidden;
+    text-align: center;
+    max-width: 40%;
+}
+
+input[type="text"], input[type="password"], textarea {
+    opacity: 0.5;
+    background-color: #baddff;
+    color: #022644;
+    border-radius: 10px;
+    border-color: #022644;
+    font-size: calc(1.2em + 0.8vw);
+    font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif;
+    font-stretch: condensed;
+    word-spacing: 0.5em;
+    margin: 2px 2px 2px 2px;
+    max-width: 50%;
+    border-width:2px;
+}
+
+
+p {
+    font-size: calc(0.2em + 2vw);
+
+
+}
+
+.mainp {
+    min-width: 50%;
+    text-align: center;
+    vertical-align: middle;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: calc(0.01em + 1.4vw);
+    color: #022644;
+}
+
+    a:hover {
+        color: #baddff;
+    }
+
+
+footer {
+
+    font-size: 1.3em;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    bottom: 0;
+    white-space: nowrap;
+}
+
+#button {
+    font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif;
+    font-stretch: condensed;
+    text-transform: uppercase;
+    background-color: #022644;
+    color: #baddff;
+    border: 0px;
+    border-radius: 10px;
+    font-size: calc(0.2em + 2vw);
+    cursor: pointer;
+    padding: 5px 5px 5px 5px;
+    width: auto;
+    height: 100%;
+}
+
+    #button:hover {
+        opacity: 0.3;
+    }
+
+    #button:active {
+        background-color: #baddff;
+        color: #022644;
+        border: 5px;
+        border-color: #022644;
+    }
+
+
+#footer_p {
+    font-size: calc(0.04em + 1.2vw);
+}
+
+
+#octopus {
+    max-width: 4%;
+    min-width: 4%;
+    height: auto;
+}
+
+/*view for smaller laptops*/
+@media (max-width: 1440px) and (min-width: 1025px)  {
+
+    section {
+        max-width: 40%;
+        font-size: calc(1em + 0.8vw);
+        height: auto;
+    }
+
+    #footer_p {
+        font-size: calc(1.5em + 1.5vw);
+    }
+
+    #questisland {
+        min-width: 80%;
+        height: auto;
+    }
+
+    #button {
+        font-size: calc(0.8em + 2vw);
+    }
+
+    #octopus {
+        max-width: 6%;
+        min-width: 6%;
+        height: auto;
+    }
+
+    p {
+        font-size: calc(1.2em + 1.2vw);
+    }
+
+
+    a {
+        font-size: calc(0.4em + 1vw);
+    }
+
+    .maincontainer {
+        margin-top: 3%;
+    }
+
+
+    #message {
+        height: 180px;
+        overflow: hidden;
+        text-align: center;
+        max-width: 49%;
+    }
+
+
+}
+
+
+
+/*view for tablets and mobiles*/
+@media (min-width: 540px) and (max-width: 1024px){
+
+    section {
+        max-width: 80%;
+        font-size: calc(1em + 0.8vw);
+        height: auto;
+    }
+
+    #footer_p {
+        font-size: calc(2.8em + 2.8vw);
+    }
+
+    #questisland {
+        min-width: 100%;
+        height: auto;
+    }
+
+    #button {
+        font-size: calc(2em + 2vw);
+    }
+
+    #octopus {
+        max-width: 15%;
+        min-width: 15%;
+        height: auto;
+    }
+
+    #main-text {
+        font-size: calc(3.2em + 3.3vw);
+    }
+
+    p {
+        font-size: calc(2.7em + 2.7vw);
+    }
+
+
+    a {
+        font-size: calc(1em + 1vw);
+    }
+
+    input[type="text"], textarea {
+        font-size: calc(2em + 2vw);
+    }
+
+    .maincontainer {
+        margin-top: 10%;
+    }
+
+
+    #message {
+        height: 180px;
+        overflow: hidden;
+        text-align: center;
+        max-width: 50%;
+    }
+}
+

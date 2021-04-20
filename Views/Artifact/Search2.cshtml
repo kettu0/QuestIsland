@@ -1,0 +1,61 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.ArtifactsRepository;
+@{
+    ViewBag.Title = "Search results";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    @section searchbar{
+        <form method="get" asp-controller="Artifact" asp-action="Search2">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas!" id="search" name="keyword">
+            </div>
+        </form>
+    }
+
+
+    @if (Model.Entities.Count > 1)
+    {
+        <h1 class="display-4">Artifacts found!</h1>
+        <p>We have found @Model.Entities.Count results on the sea!</p>
+    }
+
+    else if (Model.Entities.Count == 1)
+    {
+        <h1 class="display-4">An artifact found!</h1>
+        <p>We have found @Model.Entities.Count results on the sea!</p>
+    }
+
+    else
+    {
+        <h1 class="display-4">No artifacts found!</h1>
+        <p>Our parrots haven't found any results for your search.</p>
+        <img src="~/img/parrotresult.png" id="noresults" />
+    }
+
+    <div class="artifacts">
+
+        @foreach (var artifact in Model.Entities)
+        {
+            <div class="card">
+                <img src="~/img/@artifact.Image" id="icon">
+                <a asp-controller="Artifact" asp-action="Edit" asp-route-id="@artifact.Id"><div class="card-overlay">Edit</div></a>
+                <a asp-controller="Artifact" asp-action="Delete" asp-route-id="@artifact.Id"><div class="card-overlay">Delete</div></a>
+                <div class="container">
+                    <p id="cardtitle"> #@artifact.Id @artifact.Name</p>
+                    <p id="carddescription">TYPE: @artifact.Type</p>
+                    <p id="carddescription">PRICE: @artifact.Price</p>
+                    <p id="carddescription">AMOUNT: @artifact.Amount</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see here!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+    }
+}

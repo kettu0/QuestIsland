@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+@{
+    var _activeUser = ViewData["activeUser"] as User;
+}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Welcome to Quest Island, ye scurvy dogs!</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+
+    <header>
+        <nav id="afterlogin">
+            <span class="leftmenu">
+                <a asp-controller="Home" asp-action="Index"><span>home  </span></a>
+                <a asp-controller="Home" asp-action="Contact"><span>contact  </span></a>
+                <a asp-controller="Home" asp-action="About"><span>about </span></a>
+            </span>
+            <div class="rightmenu">
+                <div class="header-user-name">
+                    <div><i>Logged as: @_activeUser.Username</i></div>
+                    <div>
+                        <i>Role:</i>
+                        @if (_activeUser.UserRole == "C")
+                        {
+                            <i>Codecooler</i>
+                        }
+                        else if (_activeUser.UserRole == "M")
+                        {
+                            <i>Mentor</i>
+                        }
+                        else if (_activeUser.UserRole == "A")
+                        {
+                            <i>Admin</i>
+                        }
+                    </div>
+                </div>
+
+                <a href="#" class="w-slider-wrap rightmenu-wrap">
+                    <img src="~/img/wallet.png" id="wallet" width="45" class="w-image"></a>
+                <a asp-controller="User" asp-action="Details" asp-route-id="@_activeUser.UserId" class="w-slider rightmenu-wrap">
+                </a>
+                <a asp-controller="Home" asp-action="Logout" class="w-slider-wrap rightmenu-wrap">
+                    <img src="~/img/kraken.png" id="kraken" width="48" class="w-image">
+                    <p class="w-text">Logout</p>
+                </a>
+            </div>
+        </nav>
+        <span class="maincontainer">
+            <span class="mainheader">
+                <a asp-controller="Home" asp-action="Index"><img src="~/img/Questisland.png" id="questisland"></a><br>
+                <span class="headertext">
+                    Set off on an epic quest. Get golden coolcoins.<br>
+                    Exchange them for booty.<br>
+                    <br>
+                    <strong>All hands on deck!</strong>
+                </span>
+            </span>
+            <span class="skull">
+                <img src="~/img/mainimage.png" id="skullimage">
+            </span>
+        </span>
+    </header>
+
+    <section>
+        @*<div id="inLine">
+        <a href='javascript:history.go(-1)' id="gobackbutton">Go Back</a>*@
+
+        @*</div>*@
+        @RenderSection("searchbar", false)
+
+        <main role="main" class="pb-3">
+            <article>
+                @RenderBody()
+            </article>
+        </main>
+    </section>
+
+    <footer>
+        <p id="footer_p">Created by C of Thieves</p>
+        <img src="~/img/octopus.png" id="octopus">
+    </footer>
+</body>
+</html>

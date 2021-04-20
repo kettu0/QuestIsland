@@ -1,0 +1,84 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.QuestRepository
+@{
+    ViewData["Title"] = "Pending requests";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+<center>
+    <h1>YOUR PENDING ACTIONS</h1>
+    <div>
+        <table class="styled-table">
+            <tr>
+                <th><h3>CODECOOLER</h3></th>
+                <th><h3>QUEST NAME</h3> </th>
+                <th><h3>COMPLETION DATE</h3></th>
+                <th><h3>APPROVE</h3></th>
+            </tr>
+            @foreach (var quest in Model.CodecoolersQuestList)
+            {
+                if (quest.IsCompleted && quest.ApproverId == null)
+                {
+                    <tr>
+                        <td><h3><a asp-controller="User" asp-action="Details" asp-route-id="@quest.CodecoolerId"> @quest.CodecoolerNames </a> </h3> </td>
+                        <td><h3><a asp-controller="Quest" asp-action="Details" asp-route-id="@quest.QuestId"> @quest.QuestName </a> </h3> </td>
+                        @if (quest.CompletionDate != default(DateTime))
+                        {
+                            <td><h3> @quest.CompletionDate.ToString("dd/MM/yyyy") </h3></td>
+                        }
+                        else
+                        {
+                            <td><h3></h3></td>
+                        }
+                        @if (quest.ApproverId == null)
+                        {
+                            <td><h3><a asp-controller="Quest" asp-action="ApproveQuest" asp-route-id="@quest.Id"> Approve </a>  </h3></td>
+                        }
+                    </tr>
+                }
+
+            }
+
+        </table>
+    </div>
+
+    <h1>REQUESTS APPROVED BY YOU</h1>
+    <div>
+        <table class="styled-table">
+            <tr>
+                <th><h3>CODECOOLER</h3></th>
+                <th><h3>QUEST NAME</h3> </th>
+                <th><h3>COMPLETION DATE</h3></th>
+            </tr>
+            @foreach (var quest in Model.CodecoolersQuestList)
+            {
+                if (quest.ApproverId == _activeUser.UserId)
+                {
+                    <tr>
+                        <td><h3><a asp-controller="User" asp-action="Details" asp-route-id="@quest.CodecoolerId"> @quest.CodecoolerNames </a> </h3> </td>
+                        <td><h3><a asp-controller="Quest" asp-action="Details" asp-route-id="@quest.QuestId"> @quest.QuestName </a> </h3> </td>
+                        @if (quest.CompletionDate != default(DateTime))
+                        {
+                            <td><h3> @quest.CompletionDate.ToString("dd/MM/yyyy") </h3></td>
+                        }
+                        else
+                        {
+                            <td><h3></h3></td>
+                        }
+
+                    </tr>
+                }
+
+            }
+
+        </table>
+    </div>
+</center>
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see here!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}

@@ -1,0 +1,71 @@
+﻿@model QuestStore_C_of_thieves.Models.UserViewModel
+@{
+    ViewData["Title"] = Model.LoadedUser.Username;
+    var _activeUser = ViewData["activeUser"] as User;
+    var _user = Model.LoadedUser;
+    var _mentor = Model.LoadedMentor;
+    var _codecooler = Model.LoadedCodecooler;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    @*@section searchbar{
+            <form method="post" asp-controller="Quest" asp-action="Search2">
+                <div class="searchbox">
+                    <input type="text" placeholder="&#x1F50E Search the Seven Seas!" id="search" name="keyword">
+                </div>
+            </form>
+        }*@
+    <article id="itemview">
+        @if (Model.LoadedUser.UserRole == "M")
+        {
+            ViewData["UserRole"] = "Mentor";
+        }
+        else if (Model.LoadedUser.UserRole == "C")
+        {
+            ViewData["UserRole"] = "Codecooler";
+        }
+        <h1>User #@_user.UserId @ViewData["UserRole"] @_user.FirstName @_user.LastName</h1>
+        <div class="itemdetails">
+            <span class="itemimage">
+                <img src="~/img/octopus2.png" id="itemicon" height="300" />
+            </span>
+            <div class="itemdata">
+                <div>
+                    <p>First Name: @_user.FirstName</p>
+                    <p>Last Name: @_user.LastName</p>
+                    <p>Username: @_user.Username</p>
+                    <p>Gender: @_user.UserGender</p>
+                    @if (Model.LoadedUser.UserRole == "M")
+                    {
+                        <p>Main field: @_mentor.MainField</p>
+                    }
+                    else if (_user.UserRole == "C")
+                    {
+                        @*using QuestStore_C_of_thieves.DAO.TeamDAO*@
+                        <p>Exp: @_codecooler.Exp</p>
+                        <p>Team: @_codecooler.TeamId //teamname//</p>
+                        <p>Class: @_codecooler.ClassId //classname//</p>
+                        if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+                        {
+                            <p>Coolpoints wallet: @_codecooler.CoolpointsWallet.ToString() cc</p>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+            <form method="post">
+                <div class="questArtifact" id="quest_artifact">
+                    <p><input type="submit" value="DELETE" asp-controller="User" asp-action="DeleteUser" asp-route-id="@_user.UserId" ></p>
+                </div>
+            </form>
+        
+    </article>
+}
+else
+{
+<h1 class="display-4">Arrrrrrr!</h1>
+<p>There's nothing for you to see there!</p>
+<img src="~/img/skull.png" id="wrongplace" />
+}

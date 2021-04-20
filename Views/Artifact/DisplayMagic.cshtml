@@ -1,0 +1,57 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.ArtifactsRepository;
+@{
+    ViewBag.Title = "Booties to purchase!";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@section searchbar{
+    <form method="get" asp-controller="Artifact" asp-action="Search">
+        <div class="searchbox">
+            <input type="text" placeholder="&#x1F50E Search the Seven Seas for artifacts!" id="search" name="keyword">
+        </div>
+    </form>
+}
+
+<h1 class="display-4">Magic artifacts</h1>
+<br />
+<div class="dropdowns">
+    <div class="dropdown">
+        <button class="dropbtn">Sort booties by:</button>
+        <span class="dropdown-content">
+            @Html.ActionLink("⇅ By price", "DisplayMagic", new { sortOrder = ViewBag.PriceSortParm })
+            @Html.ActionLink("⇅ By name", "DisplayMagic", new { sortOrder = ViewBag.NameSortParm })
+        </span>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Display:</button>
+        <span class="dropdown-content">
+            <a class="detail" asp-controller="Artifact" asp-action="DisplayBasic">Basic artifacts</a>
+            <a class="detail" asp-controller="Artifact" asp-action="DisplayMagic">Magic artifacts</a>
+            <a class="detail" asp-controller="Artifact" asp-action="Index">All artifacts</a>
+        </span>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div class="artifacts">
+
+    @foreach (var artifact in Model.Entities)
+    {
+        <div class="card">
+            <img src="~/img/@artifact.Image" id="icon">
+            <div class="card-overlay"><a class="detail" asp-controller="Artifact" asp-action="Details" asp-route-id="@artifact.Id">Check the details!</a></div>
+            <div class="container">
+                <p id="cardtitle"> #@artifact.Id @artifact.Name</p>
+                <p id="carddescription">TYPE: @artifact.Type</p>
+                <p id="carddescription">PRICE: @artifact.Price</p>
+                <p id="carddescription">AMOUNT: @artifact.Amount</p>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+

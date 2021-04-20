@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Logout";
+    Layout = "~/Views/Shared/_LogoutLayout.cshtml";
+}
+
+<section>
+    <article>
+
+        <h1>You have been succesfully kicked out from our ship!</h1><br>
+
+    </article>
+    <article class="login">
+        <form method="get" asp-controller="Home" asp-action="Login">
+            <input type="submit" value="Login!" id="login" target="_blank"><br>
+        </form>
+    </article>
+    <div class="seaimage">
+        <div class="overlay">Visit us again!</div>
+        <img src="~/img/sea.png" id="sea">
+
+    </div>
+
+</section>
+

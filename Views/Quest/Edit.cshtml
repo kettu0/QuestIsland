@@ -1,0 +1,112 @@
+﻿@model QuestStore_C_of_thieves.Models.Quest
+@{
+    ViewData["Title"] = "Edit quest";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    @section searchbar{
+        <form method="get" asp-controller="Quest" asp-action="Search2">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas!" id="search" name="keyword">
+            </div>
+        </form>
+    }
+
+    <div class="form-container">
+        <section class="section-box">
+            <div class="text-box-area">
+                <form method="post" onsubmit="return sendForm()">
+                    <br /><br />
+                    <p id="box-title">Edit quest</p><br />
+                    <input class="flat-box" type="text" value="@Model.Name" id="quest" asp-for="Name">
+                    <img src="~/img/quest.png" class="little-icon" title="Quest name">
+                    <center>
+                        <p id="errorName"></p>
+                    </center>
+
+                    <textarea class="box-box" value="@Model.Description" id="description" asp-for="Description"></textarea>
+                    <img src="~/img/feather.png" class="description-icon" title="Description">
+                    <center><p id="errorDescription"></p></center>
+
+                    <input class="flat-box" type="text" value="@Model.CoolpointsValue" id="price" asp-for="CoolpointsValue">
+                    <img src="~/img/coolcoin.png" class="little-icon" title="Price">
+
+                    <input class="flat-box" type="text" value="@Model.ExpValue" id="exp" asp-for="ExpValue">
+                    <img src="~/img/amount.png" class="little-icon" title="Experience">
+                    <center>
+                        <p id="errorValue"></p>
+                    </center>
+
+                    @if (Model.Type == "basic")
+                    {
+                        <input type="radio" id="basictype" name="type" value="basic" checked asp-for="Type"><label for="Basic">Basic</label>
+                        <input type="radio" id="extratype" name="type" value="extra" asp-for="Type"><label for="Extra">Extra</label>
+                    }
+                    else if (Model.Type == "extra")
+                    {
+                        <input type="radio" id="basictype" name="type" value="basic" asp-for="Type"><label for="Basic">Basic</label>
+                        <input type="radio" id="extratype" name="type" value="extra" checked asp-for="Type"><label for="Extra">Extra</label>
+                    }
+
+
+                    <center>
+                        <p id="errorRadio"></p><br />
+                    </center>
+                    <center><button class="box-button" type="submit" id="button" name="sendButton" asp-controller="Artifact" asp-action="Edit">SUBMIT!</button></center>
+                    <br /><br />
+
+                </form>
+            </div>
+        </section>
+        <script src="~/js/createQuestArtifact.js"></script>
+    </div>
+
+
+
+    @*<div class="questArtifact" id="quest_artifact">
+            <form method="post">
+                <p><h2>Create new quest</h2></p>
+                <p>
+                    <input type="text" placeholder="Quest name" id="quest" asp-for="Name" value="@Model.Name" />
+                    <img src="~/img/quest.png" height="45" width="45">
+                </p>
+                <p>
+                    <textarea placeholder="Description" id="description" asp-for="Description" value="@Model.Description"></textarea>
+                </p>
+                <p>
+                    <input type="text" placeholder="Price" id="price" asp-for="CoolpointsValue" value="@Model.CoolpointsValue" />
+                    <img src="~/img/coolcoin.png" height="45" width="45">
+                </p>
+                <p>
+                    <input type="text" placeholder="Experience" id="exp" asp-for="ExpValue" value="@Model.ExpValue" />
+                    <img src="~/img/pirateship.png" height="45" width="45">
+                </p>
+                <p>
+                    @if (Model.Type == "basic")
+                    {
+                        <input type="radio" id="basictype" name="type" value="basic" checked asp-for="Type"><label for="Basic">Basic</label>
+                        <input type="radio" id="extratype" name="type" value="extra" asp-for="Type"><label for="Extra">Extra</label>
+                    }
+                    else if (Model.Type == "extra")
+                    {
+                        <input type="radio" id="basictype" name="type" value="basic" asp-for="Type"><label for="Basic">Basic</label>
+                        <input type="radio" id="extratype" name="type" value="extra" checked asp-for="Type"><label for="Extra">Extra</label>
+                    }
+
+                </p>
+                <p><input type="submit" value="SUBMIT" asp-controller="Quest" asp-action="Edit"></p>
+            </form>
+        </div>*@
+
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see there!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}
+

@@ -1,0 +1,117 @@
+﻿@using System.Security.Cryptography.X509Certificates
+@model QuestStore_C_of_thieves.Models.UserViewModel;
+
+@{
+    var _activeUser = ViewData["ActiveUser"] as User;
+}
+
+@*@section searchbar{
+        <form method="post" asp-controller="User" asp-action="Search">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas for artifacts!" id="search" name="keyword">
+            </div>
+        </form>
+    }
+
+    <h1 class="display-4">Here you can check the list of current users</h1><br />
+                                                   <div class="dropdowns">
+                                                       <div class="dropdown">
+                                                           <button class="dropbtn">Sort booties by:</button>
+                                                           <span class="dropdown-content">
+                                                               <a class="detail" asp-controller="User" asp-action="SortPriceASC">Price ascending</a>
+                                                               <a class="detail" asp-controller="User" asp-action="SortPriceDESC">Price descending</a>
+                                                               <a class="detail" asp-controller="User" asp-action="SortNameASC"> Name A-Z</a>
+                                                               <a class="detail" asp-controller="User" asp-action="SortNameDESC">Name Z-A</a>
+    </span>
+                                                       </div>
+
+                                                       <div class="dropdown">
+                                                           <button class="dropbtn">Display:</button>
+                                                           <span class="dropdown-content">
+                                                               <a class="detail" asp-controller="User" asp-action="DisplayBasic">Basic artifacts</a>
+                                                               <a class="detail" asp-controller="User" asp-action="DisplayMagic">Magic artifacts</a>
+                                                               <a class="detail" asp-controller="User" asp-action="Index">All artifacts</a>
+    </span>
+                                                       </div>
+                                                   </div>*@
+
+@{
+    if (_activeUser.UserRole == "A")
+    {
+        <form method="get" asp-controller="User" asp-action="Create">
+            <div class="questArtifact" id="quest_artifact">
+                <p><input type="submit" value="CREATE NEW USER"></p>
+            </div>
+        </form>
+    }
+}
+<h1 class="display-4">Codecoolers list:</h1>
+
+<div class="about">
+    @foreach (var codecooler in Model.CodecoolersList)
+    {
+        var user = Model.UsersList.Find(x => x.UserId == codecooler.UserId);
+
+        <div class="card">
+            @if (user.UserGender == "F")
+            {
+                <img src="~/img/pirate-girl.png" id="icon" />
+            }
+            else if (user.UserGender == "M")
+            {
+                <img src="~/img/pirate-boy.png" id="icon" />
+            }
+            <a asp-controller="User" asp-action="Edit" asp-route-id="@user.UserId"><div class="card-overlay">Edit</div></a>
+            <a asp-controller="User" asp-action="Delete" asp-route-id="@user.UserId"><div class="card-overlay">Delete</div></a>
+            <div class="container">
+                <p id="cardtitle"> #@codecooler.CodecoolerId @user.FirstName @user.LastName</p>
+                <p id="carddescription">TEAM: @codecooler.TeamId</p>
+                <p id="carddescription">CLASS: @codecooler.ClassId</p>
+                @{
+                    if (_activeUser.UserRole == "A" || _activeUser.UserRole == UserRole.M.ToString())
+                    {
+                        <p id="carddescription">E-MAIL: @user.Email</p>
+                        <p id="carddescription">WALLET: @codecooler.CoolpointsWallet.ToString() cc</p>
+                        <p id="carddescription">EXP: @codecooler.Exp.ToString() exp</p>
+                    }
+                }
+            </div>
+        </div>
+        }
+    </div>
+<h1 class="display-4">Mentors list:</h1>
+<div class="artifacts" id="mentors">
+            @{
+                foreach (var mentor in Model.MentorsList)
+                {
+                    var user = Model.UsersList.Find(x => x.UserId == mentor.UserId);
+
+                <div class="card">
+                    @if (user.UserGender == "F")
+                    {
+                        <img src="~/img/mentoress.png" id="icon" />
+                    }
+                    else if (user.UserGender == "M")
+                    {
+                        <img src="~/img/mentor.png" id="icon" />
+                    }
+                    <a asp-controller="User" asp-action="Edit" asp-route-id="@user.UserId"><div class="card-overlay">Edit</div></a>
+                    <a asp-controller="User" asp-action="Delete" asp-route-id="@user.UserId"><div class="card-overlay">Delete</div></a>
+                    <div class="container">
+                        <p id="cardtitle"> #@mentor.MentorId @user.FirstName @user.LastName</p>
+                        <p id="carddescription">FIELD: @mentor.MainField</p>
+                        @{
+                            if (_activeUser.UserRole == "A" || _activeUser.UserRole == UserRole.M.ToString())
+                            {
+                                <p id="carddescription">E-MAIL: @user.Email</p>
+                            }
+                        }
+                    </div>
+                </div>
+                }
+            }
+
+</div>
+
+
+

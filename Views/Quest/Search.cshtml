@@ -1,0 +1,58 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.QuestRepository
+@{
+    ViewData["Title"] = "Search results in quests";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+@section searchbar{
+    <form method="get" asp-controller="Quest" asp-action="Search">
+        <div class="searchbox">
+            <input type="text" placeholder="&#x1F50E Search the Seven Seas!" id="search" name="keyword">
+        </div>
+    </form>
+}
+
+@if (Model.Entities.Count > 1)
+{
+    <h1 class="display-4">Quests found!</h1>
+    <p>We have found @Model.Entities.Count results on the sea!</p>
+}
+else if (Model.Entities.Count == 1)
+{
+    <h1 class="display-4">Quest found!</h1>
+    <p>We have found @Model.Entities.Count result on the sea!</p>
+}
+else
+{
+    <h1 class="display-4">No quests found!</h1>
+    <p>Our parrots haven't found any results for your search.</p>
+    <img src="~/img/parrotresult.png" id="noresults" />
+}
+
+<div class="about">
+
+    @foreach (var quest in Model.Entities)
+    {
+        <div class="card">
+            @if (quest.Type == "basic")
+            {
+                <img src="~/img/island.png" id="icon" />
+            }
+            else if (quest.Type == "extra" && quest.ExpValue < 40)
+            {
+                <img src="~/img/island2.png" id="icon" />
+            }
+            else
+            {
+                <img src="~/img/treasuremap.png" id="icon" />
+            }
+            <a asp-controller="Quest" asp-action="Details" asp-route-id="@quest.Id"><div class="card-overlay">Check the details!</div></a>
+            <div class="container">
+                <p id="cardtitle">@quest.Name</p>
+                <p id="carddescription">Type: @quest.Type</p>
+                <p id="carddescription">Coolpoints: @quest.CoolpointsValue</p>
+                <p id="carddescription">Experience: @quest.ExpValue</p>
+            </div>
+        </div>
+    }
+
+</div>

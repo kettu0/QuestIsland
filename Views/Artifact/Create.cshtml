@@ -1,0 +1,72 @@
+﻿@model QuestStore_C_of_thieves.Models.Artifact
+@{
+    ViewBag.Title = "Create an artifact";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    @section searchbar{
+        <form method="get" asp-controller="Artifact" asp-action="Search">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas for artifacts!" id="search" name="keyword">
+            </div>
+        </form>
+    }
+
+<div class="form-container">
+    <section class="section-box">
+        <div class="text-box-area">
+            <form method="post" onsubmit="return sendForm()">
+                <br /><br />
+                <p id="box-title">Create new artifact</p><br />
+                <input class="flat-box" type="text" placeholder="Artifact name" id="quest" asp-for="Name">
+                <img src="~/img/quest.png" class="little-icon" title="Artifact name">
+                <center>
+                    <p id="errorName"></p>
+                </center>
+
+                    <textarea class="box-box" placeholder="Bootie description" id="description" asp-for="Description"></textarea>
+                    <img src="~/img/feather.png" class="description-icon" title="Description">
+                    <center><p id="errorDescription"></p></center>
+
+                    <input class="flat-box" type="text" placeholder="Price" id="price" asp-for="Price">
+                    <img src="~/img/coolcoin.png" class="little-icon" title="Price">
+                    <center>
+                        <p id="errorValue"></p>
+                    </center>
+
+                    <input class="flat-box" type="text" placeholder="Amount" id="exp" asp-for="Amount">
+                    <img src="~/img/amount.png" class="little-icon" title="Amount">
+                    <center>
+                        <p id="errorValue"></p>
+                    </center>
+
+                    <input class="flat-box" type="text" placeholder="Image name" id="imageName" asp-for="Image">
+                    <img src="~/img/pirate_flag_5.png" class="little-icon" title="Image">
+                    <center>
+                        <p id="errorImage"></p>
+                    </center>
+
+                    <input type="radio" id="basictype" name="type" value="basic" asp-for="Type"><label for="Basic">Basic</label>
+                    <input type="radio" id="extratype" name="type" value="magic" asp-for="Type"><label for="Magic">Magic</label>
+                    <center>
+                        <p id="errorRadio"></p><br />
+                    </center>
+                    <center><button class="box-button" type="submit" id="button" name="sendButton" asp-controller="Artifact" asp-action="Create">SUBMIT!</button></center>
+                    <br /><br />
+
+            </form>
+        </div>
+    </section>
+    <script src="~/js/createQuestArtifact.js"></script>
+</div>
+
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see there!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}

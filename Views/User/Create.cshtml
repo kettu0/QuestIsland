@@ -1,0 +1,96 @@
+﻿@model QuestStore_C_of_thieves.Models.UserViewModel
+@*@section searchbar{
+        <form method="post" asp-controller="Artifact" asp-action="Search">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas for artifacts!" id="search" name="keyword">
+            </div>
+        </form>
+    }*@
+@{
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    <div class="form-container">
+        <section class="section-box">
+            <div class="text-box-area">
+                <form method="post">
+                    <br /><br />
+                    <p id="box-title">Create new user</p><br />
+                    <input class="flat-box" type="text" placeholder="First name" id="quest" asp-for="LoadedUser.FirstName">
+                    <img src="~/img/first-name.png" class="little-icon" title="First Name">
+
+                    <input class="flat-box" type="text" placeholder="Last name" id="quest" asp-for="LoadedUser.LastName">
+                    <img src="~/img/surname.png" class="little-icon" title="Last Name">
+
+                    <input class="flat-box" type="text" placeholder="User name" id="quest" asp-for="LoadedUser.Username">
+                    <img src="~/img/nickname.png" class="little-icon" title="Nickname">
+
+                    <input class="flat-box" type="text" placeholder="Email" id="quest" asp-for="LoadedUser.Email">
+                    <img src="~/img/email.png" class="little-icon" title="Email">
+
+
+                    @if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+                    {
+                        <center>
+                            <label id="quest">Gender:</label>
+                            <input type="radio" value="@Gender.F" asp-for="LoadedUser.UserGender" class="user-gender" /><label id="quest">Girl</label>
+                            <input type="radio" value="@Gender.M" asp-for="LoadedUser.UserGender" class="user-gender" /><label id="quest">Boy</label>
+                            <img src="~/img/gender.png" class="little-icon" title="Gender">
+                        </center>
+
+                    }
+
+                    @if (_activeUser.UserRole == "A")
+                    {
+                        <center>
+                            <label id="quest">User Role:</label>
+                            <input type="radio" id="basictype" name="UsersRole" value="A" asp-for="LoadedUser.UserRole"><label for="A">Admin</label>
+                            <input type="radio" id="extratype" name="UsersRole" value="M" asp-for="LoadedUser.UserRole"><label for="M">Mentor</label>
+                            <input type="radio" id="extratype" name="UsersRole" value="C" asp-for="LoadedUser.UserRole"><label for="C">Codecooler</label>
+                            <img src="~/img/role.png" class="little-icon" title="Role">
+                        </center>
+                    }
+
+                    @if (_activeUser.UserRole == "M")
+                    {
+                        <center>
+                            <input type="radio" value=@UserRole.C asp-for="LoadedUser.UserRole" class="user-role" onclick="displayUserFieldsDependingOn()"><label id="quest">Codecooler</label>
+                            <img src="~/img/role.png" class="little-icon" title="Role">
+                        </center>
+                    }
+
+                    @*//Below is to be changed with JS: to display when concrete UserRole will be chosen*@
+                    @if (_activeUser.UserRole == "A")
+                    {
+                        <p class="display-when-mentor">
+                            <label id="quest">Mentor's main field:</label>
+                            <input type="text" id="quest" asp-for="LoadedMentor.MainField" />
+                            <img src="~/img/pirateship.png"  class="little-icon" title="Mentor's main field">
+                        </p>
+                    }
+                    <p class="display-when-codecooler">
+                        <label id="quest">Coolpoints wallet</label>
+                        <input type="text" id="quest" asp-for="LoadedCodecooler.CoolpointsWallet" />
+                        <img src="~/img/coolcoin.png"  class="little-icon" title="Coolcoins">
+                    </p>
+
+                    <p class="display-when-codecooler">
+                        <label id="quest">Experience</label>
+                        <input type="text" id="quest" asp-for="LoadedCodecooler.Exp" />
+                        <img src="~/img/pirateship2.png"  class="little-icon" title="Experience">
+                    </p>
+                    
+                    <center><button class="box-button" type="submit" id="button" name="sendButton" asp-controller="User" asp-action="Create">SUBMIT!</button></center>
+                    <br /><br />
+                </form>
+            </div>
+        </section>
+        <script type="text/javascript" src="/js/create-user.js"></script>
+    </div>
+}
+
+
+
+

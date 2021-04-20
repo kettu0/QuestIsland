@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="text-area">
+    <article>
+        <form onsubmit="return validateForm()" method="post">
+            <p id="main-text">Sent a message in a bottle!</p>
+            <textarea placeholder="Write us a message, matey!" id="message" name="message"></textarea><br />
+            <p><span id="messageError"></span></p>
+            <input type="text" placeholder="Pirate nickname" id="nickname" name="nickname" /><br />
+            <p><span id="nicknameError"></span></p><span id="nicknameError"></span>
+            <input type="text" placeholder="Pirate mail" id="email" name="email" /><br />
+            <p><span id="emailError"></span></p>
+            <button type="submit" id="button" name="sendButton">Send!</button><br>
+        </form>
+        <script src="~/js/contact.js"></script>
+    </article>
+</div>

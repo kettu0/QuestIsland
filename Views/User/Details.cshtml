@@ -1,0 +1,135 @@
+﻿@model QuestStore_C_of_thieves.Models.UserViewModel
+@{
+    ViewData["Title"] = Model.LoadedUser.Username;
+    var _activeUser = ViewData["activeUser"] as User;
+    var _user = Model.LoadedUser;
+    var _mentor = Model.LoadedMentor;
+    var _codecooler = Model.LoadedCodecooler;
+}
+
+@*@section searchbar{
+        <form method="post" asp-controller="Artifact" asp-action="Search">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas for artifacts!" id="search" name="keyword">
+            </div>
+        </form>
+    }*@
+
+@{ if (_activeUser.UserRole == "C" && _activeUser.UserId != _user.UserId)
+    {
+        <h1 class="display-4">Arrrrrrr!</h1>
+        <p>There's nothing for you to see there!</p>
+        <img src="~/img/skull.png" id="wrongplace" />
+    }
+    else { 
+    <article id="itemview">
+        @{
+            if (_user.UserRole == "M")
+            {
+                ViewData["UserRole"] = "Mentor";
+            }
+            else if (_user.UserRole == "C")
+            {
+                ViewData["UserRole"] = "Codecooler";
+            }
+        }
+
+
+
+        <h1>#@_user.UserId @Model.LoadedUser.FirstName @Model.LoadedUser.LastName</h1>
+
+        <br />
+        <br />
+        <div class="itemdetails">
+            @{
+                var userRank = "";
+                if ((_user.UserRole == "M") || (_user.UserRole == "A"))
+                {
+                    if (_user.UserGender == "F")
+                    {
+                        <span class="itemimage">
+                            <img src="~/img/mentoress.png" id="itemicon" height="300" />
+                        </span>
+                    }
+
+                    else if (_user.UserGender == "M")
+                    {
+                        <span class="itemimage">
+                            <img src="~/img/mentor.png" id="itemicon" height="300" />
+                        </span>
+                    }
+                }
+
+
+
+                if (_user.UserRole == "C")
+                {
+
+                    if (_codecooler.Exp < 100)
+                    {
+                        <span class="itemimage">
+                            <img src="~/img/cabin-boy.png" id="itemicon" height="300" title="Cabin Boy" />
+                        </span>
+                        userRank += "Cabin Boy";
+                    }
+                    else if (_codecooler.Exp >= 100 && _codecooler.Exp < 200)
+                    {
+                        <span class="itemimage">
+                            <img src="~/img/boatswain.png" id="itemicon" height="300" title="Boatswain" />
+                        </span>
+                        userRank += "Boatswain";
+                    }
+                    else if (_codecooler.Exp >= 200 && _codecooler.Exp < 300)
+                    {
+                        <span class="itemimage">
+                            <img src="~/img/first-mate.png" id="itemicon" height="300" title="First Mate" />
+                        </span>
+                        userRank += "First Mate";
+                    }
+                    else if (_codecooler.Exp >= 300 && _codecooler.Exp < 400)
+                    {
+                        <span class="itemimage">
+                            <img src="~/img/quartermaster.png" id="itemicon" height="300" title="Quartermaster" />
+                        </span>
+                        userRank += "Quartermaster";
+                    }
+                    else if (_codecooler.Exp >= 400)
+                    {
+                        <span class="itemimage">
+                            <img src="~/img/captain.png" id="itemicon" height="300" title="Captain" />
+                        </span>
+                        userRank += "Captain";
+                    }
+                }
+
+            }
+
+            <div class="itemdata">
+                <div>
+                    <p>First Name: @_user.FirstName</p>
+                    <p>Last Name: @_user.LastName</p>
+                    <p>Username: @_user.Username</p>
+                    <p>Gender: @_user.UserGender</p>
+                    @if (_user.UserRole == "M")
+                    {
+                        <p>Main field: @_mentor.MainField</p>
+                    }
+                    else if (_user.UserRole == "C")
+                    {
+                        @*using QuestStore_C_of_thieves.DAO.TeamDAO*@
+                        <p>Exp: @_codecooler.Exp</p>
+                        <p>Team: @_codecooler.TeamId //teamname//</p>
+                        <p>Class: @_codecooler.ClassId //classname//</p>
+                        <p>Rank: @userRank</p>
+                        if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+                        {
+                            <p>Coolpoints wallet: @_codecooler.CoolpointsWallet.ToString() cc</p>
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+    </article>
+    }
+}

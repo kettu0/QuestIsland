@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Frontpage";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser != null)
+{
+    <article>
+        <h1>Welcome back @_activeUser.FirstName!</h1>
+        <div class="optionsfront">
+
+            @if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+            {
+                <form asp-controller="Quest" asp-action="Pending">
+                    <input type="submit" value="pending requests" class="option" id="pending">
+                    <img src="img\hourglass.png" id="hourglass" height="200">
+                </form>
+
+                <form asp-controller="Quest" asp-action="Index2">
+                    <input type="submit" value="modify quests" class="option" id="modifyquests">
+                    <img src="img\feather.png" id="feather" height="200">
+                </form>
+
+                <form asp-controller="Artifact" asp-action="Index2">
+                    <input type="submit" value="modify artifacts" class="option" id="modifyartifacts">
+                    <img src="img\magic-wand.png" id="wand" height="200">
+                </form>
+
+                <form asp-controller="User" asp-action="Index">
+                    <input type="submit" value="modify users" class="option" id="modifyuser">
+                    <img src="img\pirate.png" id="pirate" height="200">
+                </form>
+                <form asp-controller="Group" asp-action="Classes">
+                    <input type="submit" value="manage classes" class="option" id="manageclass">
+                    <img src="img\pirateship.png" id="pirateship" height="200">
+                </form>
+                <form asp-controller="Group" asp-action="Teams">
+                    <input type="submit" value="manage teams" class="option" id="menageteams">
+                    <img src="img\pirate_flag_5.png" id="pirateflag" height="200">
+                </form>
+            }
+
+            <form asp-controller="User" asp-action="Details" asp-route-id="@_activeUser.UserId.ToString()">
+                <input type="submit" value="My profile" class="option" id="My profile">
+                <img src="img\parrot.png" id="parrot" height="200">
+            </form>
+
+            <form asp-controller="Quest" asp-action="Index">
+                <input type="submit" value="quests" class="option" id="quests">
+                <img src="img\message-in-a-bottle.png" id="parrot" height="200">
+            </form>
+
+            <form asp-controller="Artifact" asp-action="Index">
+                <input type="submit" value="artifacts" class="option" id="artifacts">
+                <img src="img\treasure.png" id="treasure" height="200">
+            </form>
+
+            <form method ="get" asp-controller="User" asp-action="Password" asp-route-id="@_activeUser.UserId">
+                <input type="submit" value="Change password" class="option" id="Password">
+                <img src="img\key.png" id="treasure" height="200">
+            </form>
+
+            @if (_activeUser.UserRole == "C")
+            {
+                <form asp-controller="Quest" asp-action="MyQuests">
+                    <input type="submit" value="My quests" class="option" id="myquests">
+                    <img src="img\myquests-map.png" id="parrot" height="200">
+                </form>
+
+                <form asp-controller="Artifact" asp-action="MyArtifacts">
+                    <input type="submit" value="My artifacts" class="option" id="myquests">
+                    <img src="img\treasure-chest.png" id="parrot" height="200">
+                </form>
+            }
+        </div>
+    </article>
+}
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see there!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}

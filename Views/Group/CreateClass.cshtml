@@ -1,0 +1,74 @@
+﻿@model QuestStore_C_of_thieves.Models.NewClassViewModel
+@{
+    ViewBag.Title = "Creatin' new crew!";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A")
+{
+    <center>
+        <div class="create_class" style="text-align:center">CREATING NEW CLASS</div>
+
+        <div class="create_class_text" style="text-align: center"> ENTER THE NAME OF NEW CLASS</div>
+
+    </center>
+    
+    @using (Html.BeginForm())
+    {
+        <center>
+            <div class="create_class_input" >
+                @Html.TextBoxFor(m => m.NewClassName)
+            </div>
+        </center>
+
+        <center>
+            <div class="create_class_text" style="text-align: center"> ASSIGN MENTORS TO THE NEW CLASS </div>
+
+            <div>
+                <table class="styled-table" id="small-table" style="font-size: 3em">
+                    <tr>
+                        <th align="center"><h2>  ID</h2> </th>
+                        <th align="center"><h2> NAME</h2>  </th>
+                        <th align="center"> <h2>  LAST NAME </h2></th>
+                        <th align="center"> <h2> E-MAIL ADRESS</h2></th>
+                    </tr>
+                    @for (var i = 0; i < Model.Mentors.Count(); i++)
+                    {
+                        <tr>
+                            @Html.HiddenFor(m => m.Mentors[i].UserId)
+                            @Html.HiddenFor(m => m.Mentors[i].FirstName)
+                            @Html.HiddenFor(m => m.Mentors[i].LastName)
+                            @Html.HiddenFor(m => m.Mentors[i].Email)
+                            <td> @Html.DisplayFor(m => m.Mentors[i].UserId) </td>
+                            <td> @Html.DisplayFor(m => m.Mentors[i].FirstName)</td>
+                            <td> @Html.DisplayFor(m => m.Mentors[i].LastName) </td>
+                            <td> @Html.DisplayFor(m => m.Mentors[i].Email) </td>
+                            <td>
+                                <div class="create_class_checkbox">
+                                    @Html.CheckBoxFor(m => m.Mentors[i].IsAssigned)
+                                </div>
+                                
+                            </td>
+
+                           
+                        </tr>
+
+                    }
+                </table>
+                <form method="post" asp-controller="Group" asp-action="CreateClass">
+                    <div class="create_class_submit">
+                        <input type="submit" value="Create!"/>
+                    </div>
+                </form>
+
+            </div>
+        </center>
+    }
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see here!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Welcome to Quest Island, ye scurvy dogs!</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a asp-controller="Home" asp-action="Index"><span>home  </span></a>
+            <a asp-controller="Home" asp-action="Contact"><span>contact  </span></a>
+            <a asp-controller="Home" asp-action="About"><span>about </span></a>
+            <a asp-controller="Home" asp-action="Login"><span>log in </span></a>
+        </nav>
+        <span class="maincontainer">
+            <span class="mainheader">
+                <a asp-controller="Home" asp-action="Index"><img src="~/img/Questisland.png" id="questisland"></a><br>
+                <span class="headertext">
+                    Set off on an epic quest. Get golden coolcoins.<br>
+                    Exchange them for booty.<br>
+                    <br>
+                    <strong>All hands on deck!</strong>
+                </span>
+            </span>
+            <span class="skull">
+                <img src="~/img/mainimage.png" id="skullimage">
+            </span>
+        </span>
+
+
+
+    </header>
+
+    <section>
+        @RenderSection("searchbar", false)
+
+        <main role="main" class="pb-3">
+            <article>
+                @RenderBody()
+
+            </article>
+        </main>
+
+
+    </section>
+
+    <footer>
+        <p id="footer_p">Created by C of Thieves</p>
+        <img src="~/img/octopus.png" id="octopus">
+    </footer>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.TeamRepository;
+@{
+    ViewData["Title"] = "Our pirate crews!";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+
+    <div class="titles">
+        Our cursed crews! 
+    </div>
+
+    <br />
+
+    <div class="artifacts">
+
+        @foreach (var team in Model.Entities)
+        {
+            <div class="card">
+                <img src="~/img/pirate_flag_3.png" id="icon">
+                <a asp-controller="Group" asp-action="TeamDetails" asp-route-id="@team.TeamId"><div class="card-overlay">Details</div></a>
+                <a asp-controller="Group" asp-action="DeleteTeam" asp-route-id="@team.TeamId"><div class="card-overlay">Delete</div></a>
+                <div class="container">
+                    <p id="cardtitle"> #@team.TeamId @team.TeamName</p>
+                    <p id="carddescription">DATE OF CREATION: @team.CreationDate.ToString("dd/MM/yyyy")</p>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see here!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}
+

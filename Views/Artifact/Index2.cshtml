@@ -1,0 +1,51 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.ArtifactsRepository;
+@{
+    ViewData["Title"] = "Artifacts to edit!";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    @section searchbar{
+        <form method="get" asp-controller="Artifact" asp-action="Search2">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas!" id="search" name="keyword">
+            </div>
+        </form>
+    }
+
+    <form method="get" asp-controller="Artifact" asp-action="Create">
+        <div class="questArtifact" id="quest_artifact">
+            <p><input type="submit" value="CREATE NEW ARTIFACT"></p>
+        </div>
+    </form>
+
+    <h1 class="display-4">Artifacts to edit!</h1>
+    <br />
+
+    <div class="artifacts">
+
+        @foreach (var artifact in Model.Entities)
+        {
+            <div class="card">
+                <img src="~/img/@artifact.Image" id="icon">
+                <a asp-controller="Artifact" asp-action="Edit" asp-route-id="@artifact.Id"><div class="card-overlay">Edit</div></a>
+                <a asp-controller="Artifact" asp-action="Delete" asp-route-id="@artifact.Id"><div class="card-overlay">Delete</div></a>
+                <div class="container">
+                    <p id="cardtitle"> #@artifact.Id @artifact.Name</p>
+                    <p id="carddescription">TYPE: @artifact.Type</p>
+                    <p id="carddescription">PRICE: @artifact.Price</p>
+                    <p id="carddescription">AMOUNT: @artifact.Amount</p>
+                </div>
+            </div>
+        }
+
+    </div>
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see here!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}

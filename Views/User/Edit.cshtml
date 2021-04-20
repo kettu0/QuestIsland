@@ -1,0 +1,113 @@
+﻿@model QuestStore_C_of_thieves.Models.UserViewModel
+@*@section searchbar{
+        <form method="post" asp-controller="Artifact" asp-action="Search">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas for artifacts!" id="search" name="keyword">
+            </div>
+        </form>
+    }*@
+@{
+    var _activeUser = ViewData["activeUser"] as User;
+}
+<div class="form-container">
+    <section class="section-box">
+        <div class="text-box-area">
+            <form method="post">
+                <br /><br />
+                <p id="box-title">Edit user</p><br />
+
+                <input class="flat-box" type="text" value="@Model.LoadedUser.UserId" asp-for="LoadedUser.UserId">
+                <img src="~/img/feather.png" class="little-icon" title="Id">
+
+                <input class="flat-box" type="text" value="@Model.LoadedUser.FirstName" id="quest" asp-for="LoadedUser.FirstName">
+                <img src="~/img/first-name.png" class="little-icon" title="First name">
+
+                <input class="flat-box" type="text" value="@Model.LoadedUser.LastName" id="quest" asp-for="LoadedUser.LastName">
+                <img src="~/img/surname.png" class="little-icon" title="Last name">
+
+                <input class="flat-box" type="text" value="@Model.LoadedUser.Username" id="quest" asp-for="LoadedUser.Username">
+                <img src="~/img/nickname.png" class="little-icon" title="Username">
+
+                <input class="flat-box" type="text" value="@Model.LoadedUser.Email" id="quest" asp-for="LoadedUser.Email">
+                <img src="~/img/email.png" class="little-icon" title="E-mail">
+                @{
+                    @if (_activeUser.UserRole == "A")
+                    {
+
+                        <center>
+                            @if (Model.LoadedUser.UserGender == "F")
+                            {
+                                <br />
+                                <label id="quest">Gender:</label>
+                                <input type="radio" value="@Model.LoadedUser.UserGender" id="quest" asp-for="LoadedUser.UserGender" checked /><label for="F">F</label>
+                                <input type="radio" value="@Model.LoadedUser.UserGender" id="quest" asp-for="LoadedUser.UserGender" /><label for="M">M</label>
+                                <img src="~/img/gender.png" class="little-icon" title="Gender">
+                            }
+                            else if (Model.LoadedUser.UserGender == "M")
+                            {
+                                <br />
+                                <label id="quest">Gender:</label>
+                                <input type="radio" value="@Model.LoadedUser.UserGender" id="quest" asp-for="LoadedUser.UserGender"><label for="F">F</label>
+                                <input type="radio" value="@Model.LoadedUser.UserGender" id="quest" asp-for="LoadedUser.UserGender" checked><label for="M">M</label>
+                                <img src="~/img/gender.png" class="little-icon" title="Gender">
+                            }
+
+                        </center>
+
+                        <label id="quest">User Role:</label>
+                        @if (Model.LoadedUser.UserRole == "M" || Model.LoadedUser.UserRole == "A")
+                        {
+                            <center>
+                                <input type="radio" value=@UserRole.A asp-for="LoadedUser.UserRole"><label for="A">Admin</label>
+                                <input type="radio" value=@UserRole.M asp-for="LoadedUser.UserRole"><label for="M">Mentor</label>
+                                <img src="~/img/role.png" class="little-icon" title="Role">
+                            </center>
+                        }
+                        else
+                        {
+                            <center>
+                                <input type="radio" value=@UserRole.C asp-for="LoadedUser.UserRole"><label for="C">Codecooler</label>
+                                <img src="~/img/role.png" class="little-icon" title="Role">
+                            </center>
+                        }
+
+                    }
+
+                    else if (_activeUser.UserRole == "M")
+                    {
+                        <center>
+                            <input type="text" value="@Model.LoadedUser.UserGender" id="quest" asp-for="LoadedUser.UserGender" />
+                            <img src="~/img/role.png" class="little-icon" title="Role">
+                        </center>
+                    }
+
+                    @if (Model.LoadedUser.UserRole == "M" && _activeUser.UserRole == "A")
+                    {
+                        <center>
+                            <label id="quest">Field:</label>
+                            <input type="text" value="@Model.LoadedMentor.MainField" id="quest" asp-for="LoadedMentor.MainField" />
+                            <img src="~/img/pirateship.png" class="little-icon" title="Mentor's main field">
+                        </center>
+                    }
+
+                    else if (Model.LoadedUser.UserRole == "C" && (_activeUser.UserRole == "M" || _activeUser.UserRole == "A"))
+                    {
+                        <center>
+                            <input type="text" value="@Model.LoadedCodecooler.CoolpointsWallet" id="quest" asp-for="LoadedCodecooler.CoolpointsWallet" />
+                            <img src="~/img/coolcoin.png" class="little-icon" title="Coolcoins">
+                        </center>
+                        <center>
+                            <input type="text" value="@Model.LoadedCodecooler.Exp" id="quest" asp-for="LoadedCodecooler.Exp" />
+                            <img src="~/img/pirateship2.png" class="little-icon" title="Experience">
+                        </center>
+                    }
+                }
+                <center><button class="box-button" type="submit" id="button" name="sendButton" asp-controller="User" asp-action="Edit">SUBMIT!</button></center>
+                <br /><br />
+            </form>
+        </div>
+    </section>
+    <script type="text/javascript" src="/js/create-user.js"></script>
+</div>
+
+

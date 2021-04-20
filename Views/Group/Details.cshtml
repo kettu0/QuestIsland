@@ -1,0 +1,55 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.TeamRepository;
+@{
+    ViewBag.Title = "Search results";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+<center>
+    <br />   <br />   <br />
+    <div class="column-container">
+        <div class="codecoolers-column">
+            <h1>@Model.Entity.TeamName</h1>
+
+            <br />  <br />
+            <div>
+                <h1> TEAM QUESTS </h1>
+                <table class="styled-table" id="small-table">
+                    <tr>
+                        <th align="center"><h2> NAME</h2>  </th>
+                        <th align="center"> <h2> COOLPOINT </h2></th>
+                        <th align="center"> <h2> EXPERIENCE </h2></th>
+                    </tr>
+
+                    @foreach (var quest in Model.Quests)
+                    {
+                        <tr>
+                            <td align="center"> <h2><a asp-controller="Quest" asp-action="Details" asp-route-id="@quest.Id"> @quest.Name </a> </h2> </td>
+                            <td align="center"><h2> @quest.CoolpointsValue </h2> </td>
+                            <td align="center"><h2> @quest.ExpValue</h2></td>
+                        </tr>
+
+                    }
+                </table>
+            </div>
+            <br />  <br />
+            <div>
+                <h1> CODECOOLERS </h1>
+                <table class="styled-table" id="small-table">
+                    <tr>
+                        <th align="center"><h2>  ID</h2> </th>
+                        <th align="center"><h2> NAME</h2>  </th>
+                        <th align="center"> <h2>  SURNAME</h2></th>
+                        <th align="center"> <h2> E-MAIL ADRESS</h2></th>
+                    </tr>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td align="center"> <h2> @user.UserId  </h2> </td>
+                            <td align="center"><h2><a asp-controller="User" asp-action="Details" asp-route-id="@user.UserId">  @user.FirstName </a> </h2> </td>
+                            <td align="center"><h2><a asp-controller="User" asp-action="Details" asp-route-id="@user.UserId"> @user.LastName </a></h2></td>
+                            <td align="center"><h2> @user.Email</h2></td>
+                        </tr>
+                    }
+                </table>
+
+            </div>

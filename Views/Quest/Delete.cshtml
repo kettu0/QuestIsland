@@ -1,0 +1,56 @@
+﻿@model QuestStore_C_of_thieves.Models.Quest
+@{
+    ViewData["Title"] = Model.Name;
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    @section searchbar{
+        <form method="get" asp-controller="Quest" asp-action="Search2">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas!" id="search" name="keyword">
+            </div>
+        </form>
+    }
+    <article id="itemview">
+        <h1>@Model.Name</h1>
+        <div class="itemdetails">
+            <span class="itemimage">
+                @if (Model.Type == "basic")
+                {
+                    <img src="~/img/island.png" id="itemicon" height="300" />
+                }
+                else if (Model.Type == "extra" && Model.ExpValue < 40)
+                {
+                    <img src="~/img/island2.png" id="itemicon" height="300" />
+                }
+                else
+                {
+                    <img src="~/img/treasuremap.png" id="itemicon" height="300" />
+                }
+            </span>
+            <div class="itemdata">
+                <div>
+                    <p>Name: @Model.Name</p>
+                    <p>Type: @Model.Type</p>
+                    <p>Coolpoints: @Model.CoolpointsValue</p>
+                    <p>Experience: @Model.ExpValue</p>
+                </div>
+            </div>
+        </div>
+        <form method="post">
+            <div class="questArtifact" id="quest_artifact">
+                <p><input type="submit" value="DELETE" asp-controller="Quest" asp-action="Delete"></p>
+            </div>
+        </form>
+    </article>
+
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see there!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}

@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using QuestStore_C_of_thieves.Models
+@{
+    var activeUser = ViewData["activeUser"] as User;
+    if ((string)ViewData["Title"] == "Login")
+    {
+        Layout = "_LoginLayout";
+    }
+    else
+    {
+        switch (activeUser?.UserRole)
+        {
+            case "C":
+                Layout = "_LayoutLoggedCodecooler";
+                break;
+            case "M":
+                Layout = "_LayoutLoggedMentor";
+                break;
+            case "A":
+                Layout = "_LayoutLoggedMentor";
+                break;
+            default:
+                Layout = "_Layout";
+                break;
+        }
+    }
+
+}

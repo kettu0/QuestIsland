@@ -1,0 +1,37 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="text-area">
+    <article>
+        <p id="main-text">login</p>
+        <div class="mainp"><p>Login with your nickname and password to embark on a quest!</p></div>
+        <form method="post">
+            <input type="text" placeholder="Pirate nickname" id="nickname" asp-for="Username" /><br />
+            <input class="pass" type="password" placeholder="Secret pirate code" id="password" autocomplete="off" asp-for="Password" /><br />
+            <input type="submit" value="Login!" id="button" target="_blank" asp-controller="Home" asp-action="Login"><br>
+        </form>
+
+        @*<form action="front.html">
+
+        </form>*@
+    </article>
+    <p><a asp-controller="Home" asp-action="Contact">Forgot your password? <br />Click HERE</a></p>
+</div>
+
+
+
+
+@*<div class="text-center">
+    <h1>HELLO USER!</h1>
+    <h2> PLEASE LOG IN </h2>
+
+    <form method="post">
+        <button asp-controller="Home" asp-action="Login">Log in!</button>
+        <input type="text" asp-for="Username" />
+        <input type="text" asp-for="Password" />
+
+    </form>
+
+</div>*@

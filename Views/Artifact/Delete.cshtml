@@ -1,0 +1,53 @@
+﻿@model QuestStore_C_of_thieves.Models.Artifact
+@{
+    ViewBag.Title = Model.Name;
+    var _activeUser = ViewData["activeUser"] as User;
+}
+
+@if (_activeUser.UserRole == "A" || _activeUser.UserRole == "M")
+{
+    @section searchbar{
+        <form method="get" asp-controller="Artifact" asp-action="Search">
+            <div class="searchbox">
+                <input type="text" placeholder="&#x1F50E Search the Seven Seas for artifacts!" id="search" name="keyword">
+            </div>
+        </form>
+    }
+
+    <article id="itemview">
+        <h1>@Model.Name</h1>
+        <div class="itemdetails">
+            <span class="itemimage">
+                <img src="~/img/@Model.Image" id="itemicon" height="300" />
+            </span>
+            <div class="itemdata">
+                <div>
+                    <p>Name: @Model.Name</p>
+                    <p>Type: @Model.Type</p>
+                    <p>Price: @Model.Price</p>
+                    <p>Amount: @Model.Amount</p>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="itemdescription">
+        @Model.Description;
+    </div>
+
+    <form method="post">
+        <div class="questArtifact" id="quest_artifact">
+            <p><input type="submit" value="DELETE" asp-controller="Artifact" asp-action="Delete"></p>
+
+        </div>
+        </form>
+    </article>
+}
+
+else
+{
+    <h1 class="display-4">Arrrrrrr!</h1>
+    <p>There's nothing for you to see there!</p>
+    <img src="~/img/skull.png" id="wrongplace" />
+}
+

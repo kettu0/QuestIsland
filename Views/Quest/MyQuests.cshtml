@@ -1,0 +1,51 @@
+﻿@model QuestStore_C_of_thieves.Models.Repositories.QuestRepository
+@{
+    ViewData["Title"] = "My Quests";
+    var _activeUser = ViewData["activeUser"] as User;
+}
+<center>
+    <h1>ALL YOUR QUESTS IN ONE PLACE!</h1>
+    <div>
+        <table class="styled-table">
+            <tr>
+                <th><h3>QUEST NAME</h3> </th>
+                <th><h3>COMPLETION DATE</h3></th>
+                <th><h3>COMPLETED</h3></th>
+                <th><h3>APPROVED</h3></th>
+            </tr>
+            @foreach (var quest in Model.CodecoolersQuestList)
+            {
+        <tr>
+            <td><h3><a asp-controller="Quest" asp-action="Details" asp-route-id="@quest.QuestId"> @quest.QuestName </a> </h3> </td>
+            @if (quest.CompletionDate != default(DateTime))
+            {
+                <td><h3> @quest.CompletionDate.ToString("dd/MM/yyyy") </h3></td>
+            }
+            else
+            {
+                <td><h3></h3></td>
+            }
+
+            @if (!quest.IsCompleted)
+            {
+                <td><h3><a asp-controller="Quest" asp-action="CompleteQuest" asp-route-id="@quest.Id"> Mark as completed </a>  </h3></td>
+            }
+            else
+            {
+                <td><img src="~/img/approved.png" height="40" /></td>
+            }
+
+            @if (quest.ApproverId != null)
+            {
+                <td><img src="~/img/approved.png" height="40" title="by @quest.AprroverNames" /></td>
+            }
+            else
+            {
+                <td><img src="~/img/denied.png" height="40" /></td>
+            }
+
+        </tr>
+            }
+        </table>
+    </div>
+</center>
